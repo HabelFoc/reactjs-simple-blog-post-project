@@ -43,7 +43,7 @@ class App extends Component {
 								<Link to="/"><NavbarBrand>MyBlogDotCom</NavbarBrand></Link>
 								<Nav>
 									<NavItem>
-										<Link to="posts/new"><NavLink>New Posts</NavLink></Link>
+										<Link replace to="posts/new">New Posts</Link>
 									</NavItem>
 								</Nav>
 							</Container>
