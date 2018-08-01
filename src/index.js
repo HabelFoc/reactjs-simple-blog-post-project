@@ -20,7 +20,7 @@ class App extends Component {
 				<BrowserRouter>
 					<div>
 						<Route path="/detail" component={PostDetail} />
-						<Route path="/" component={Posts} />
+						<Route exact path="/" component={Posts} />
 					</div>
 				</BrowserRouter>
 			</Provider>
