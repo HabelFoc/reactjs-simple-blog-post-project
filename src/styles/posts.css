@@ -1,0 +1,8 @@
+li.list-group-item:hover{
+	background-color: rgba(0,0,0,.075)!important;
+}
+
+* a{
+	text-decoration: none !important;
+	color: #333 !important;
+}
