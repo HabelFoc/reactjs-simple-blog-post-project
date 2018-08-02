@@ -15,13 +15,23 @@ class Posts extends Component {
 	}
 
 	componentDidMount(){
-		this.props.fetchPosts();
+		console.log(this.props.posts);
+		
+		const posts_state = Object.keys(this.props.posts);
+
+		// only fetch of state is empty
+		if(posts_state.length < 1){ this.props.fetchPosts() }
+	}
+
+	gropItemClick(itemData){
+		this.props.history.push(`/posts/detail/${itemData.id}`);
 	}
 
 	renderPosts(){
 		return _.map(this.props.posts, post => {
 			return(
 				<ListGroupItem
+				onClick={this.gropItemClick.bind(this, post)}
 				key={post.id} 
 				style={{
 					border: 'none',
@@ -30,10 +40,8 @@ class Posts extends Component {
 				  	cursor: 'pointer'
 				}}
 				>
-					<Link to={`/posts/detail/${post.id}`}>
 						<h4>{post.title}</h4>
 						<p style={{color: '#888'}}>{post.categories}</p>
-					</Link>
 				</ListGroupItem>
 			);
 		})

@@ -36,13 +36,14 @@ export const createPost = (values, callback) => {
 		try{
 			axios
 			.post(`${ROOT_URL}/posts${API_KEY}`, values)
-			.then(res => {
+			.then(async res => {
 
 				dispatch({
-					type: FETCH_POSTS,
+					type: CREATE_POST,
 					payload: res.data
 				});
 				console.log('Success! Post created!');
+				await dispatch(fetchPosts());
 				callback(); // upon success? => back to home page!
 
 			});
@@ -79,3 +80,25 @@ export const fetchPost = (id) => {
 	}
 
 } // END OF 'fetchPost' action
+
+
+export const deletePost = (id, callback) => {
+
+
+	return async (dispatch) => {
+
+		try{
+			axios
+			.delete(`${ROOT_URL}/posts/${id}`)
+			.then(async res => {
+				console.log(`Post ${id} successful deleted...!`);
+				await dispatch(fetchPosts());
+				callback();
+			});
+
+		}catch(err){
+			console.log('an axios requests failed...:deletePost');
+		}
+
+	};
+}

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchPost } from '../actions';
+import { fetchPost, fetchPosts, deletePost } from '../actions';
 
-import { Container, Button, Jumbotron } from 'reactstrap';
+import { Container, Button, Jumbotron, Row, Col } from 'reactstrap';
 
 
 class PostsDetail extends Component {
@@ -11,11 +11,16 @@ class PostsDetail extends Component {
 		super(props);
 
 		this.renderContent = this.renderContent.bind(this);
+		this.onClickDeletePost = this.onClickDeletePost.bind(this);
 	}
 
 	componentDidMount(){
 		const postId = this.props.match.params.id;
-		this.props.fetchPost(postId);
+
+		// only fetch of state is empty
+		if(!this.props.post) { this.props.fetchPosts() }
+
+		// this.props.fetchPost(postId);
 	}
 
 	renderContent(){
@@ -37,12 +42,22 @@ class PostsDetail extends Component {
 		}
 	}
 
+	onClickDeletePost(){
+		// call action to delete specific post /w id
+		const { id } = this.props.match.params;
+		this.props.deletePost(id, () => this.props.history.push('/'));
+	}
+
 	render(){
 		return(
 			<div>
 				<Container>
 					<center><h1 style={{marginBottom: '1rem'}}>Posts Detail</h1></center>
-					<Link to="/"><Button color="primary">Go Back</Button></Link>
+					<Row>
+						<Col><Link to="/"><Button color="primary">Go Back</Button></Link></Col>
+						<Col sm={{size: 'auto'}}><Button color="danger" onClick={this.onClickDeletePost}>Delete Post</Button></Col>
+					</Row>
+				
 					{this.renderContent()}
 				</Container>
 			</div>
@@ -58,4 +73,4 @@ function mapStateToProps({posts}, ownProps){
 	}
 };
 
-export default connect(mapStateToProps, { fetchPost })(PostsDetail);
+export default connect(mapStateToProps, { fetchPost, fetchPosts, deletePost })(PostsDetail);
