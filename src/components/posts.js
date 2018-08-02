@@ -5,7 +5,6 @@ import { fetchPosts } from '../actions';
 import { Link } from 'react-router-dom';
 
 import { ListGroup, ListGroupItem, Button } from 'reactstrap';
-
 import '../styles/posts.css';
 
 class Posts extends Component {
@@ -19,35 +18,41 @@ class Posts extends Component {
 		this.props.fetchPosts();
 	}
 
+	onClickListItem(itemData){
+		// get specific post reference by id
+		this.props.history.push(`/posts/detail/${itemData.id}`);
+	}
+
 	renderPosts(){
 		return _.map(this.props.posts, post => {
 			return(
-				<Link to="/posts/detail" key={post.id}>
-					<ListGroupItem 
-					key={post.id} 
-					style={{
-						border: 'none',
-					 	borderBottom: '2px solid #ccc',
-					  	marginBottom: '1rem',
-					  	cursor: 'pointer'
-					}}
-					>
-						<h4>{post.title}</h4>
-						<p style={{color: '#888'}}>{post.categories}</p>
-					</ListGroupItem>
-				</Link>
+				<ListGroupItem
+				onClick={this.onClickListItem.bind(this, post)} 
+				key={post.id} 
+				style={{
+					border: 'none',
+				 	borderBottom: '2px solid #ccc',
+				  	marginBottom: '1rem',
+				  	cursor: 'pointer',
+				  	paddingTop: '.75rem',
+				  	paddingBottom: '.75rem'
+				}}
+				>
+					<h4>{post.title}</h4>
+					<p style={{color: '#888'}}>{post.categories}</p>
+				</ListGroupItem>
 			);
 		})
 	}
 
 	render(){
 		return(
-			<div>
-				<center><h1 style={{marginBottom: '2rem'}}>Posts</h1></center>
-				<ListGroup>
+			<div style={{marginBottom: '4rem'}}>
+				<center><h1 style={{marginBottom: '1rem'}}>Posts</h1></center>
+				<Link to="/posts/new"><Button>New Post</Button></Link>
+				<ListGroup style={{marginTop: '2rem'}}>
 					{this.renderPosts()}
 				</ListGroup>
-				<Link to="/posts/new"><Button block>New Post</Button></Link>
 			</div>
 		);
 	}

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import store from './store';
 import Posts from './components/posts';
-import PostDetail from './components/posts_detail';
-import PostNew from './components/posts_new';
+import PostsDetail from './components/posts_detail';
+import PostsNew from './components/posts_new';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { 
@@ -24,6 +24,7 @@ import {
 import  { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
+import './styles/index.css';
 
 // dev-server hot reloading
 if (module.hot){
@@ -38,12 +39,12 @@ class App extends Component {
 			<Provider store={store} >
 				<BrowserRouter>
 					<div>
-						<Navbar color="light" light expand="md">
+						<Navbar color="dark" dark expand="md">
 							<Container>
-								<Link to="/"><NavbarBrand>MyBlogDotCom</NavbarBrand></Link>
+								<Link className="brand" to="/"><h4>MyBlogDotCom</h4></Link>
 								<Nav>
 									<NavItem>
-										<Link replace to="posts/new">New Posts</Link>
+										<NavLink href="javascript:void(0)">Contact</NavLink>
 									</NavItem>
 								</Nav>
 							</Container>
@@ -52,9 +53,9 @@ class App extends Component {
 						<Container className="mt-5">
 
 							<Switch>
+								<Route path="/posts/new" component={PostsNew} />
+								<Route path="/posts/detail/:id" component={PostsDetail} />
 								<Route exact path="/" component={Posts} />
-								<Route path="/posts/new" component={PostNew} />
-								<Route path="/posts/detail" component={PostDetail} />
 								<Route component={() => <div>Page Not Found</div>} />
 							</Switch>
 							
