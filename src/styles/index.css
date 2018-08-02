@@ -4,6 +4,23 @@
 	font-family: 'Lato', sans-serif;
 }
 
-a{
-	color: #fff !important;
+nav.navbar div.container{
+	padding: 8px;
 }
+
+nav.navbar *,
+nav.navbar a *{
+	color: #f4f4f4 !important;
+	font-size: 1rem !important;
+}
+
+nav.navbar a{
+	background: #111 !important;
+	padding: 10px;
+	border-radius: 8px 4px;
+}
+
+nav.navbar a.brand{
+	font-size: 1.1rem !important;
+}
+

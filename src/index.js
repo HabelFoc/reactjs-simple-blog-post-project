@@ -41,10 +41,10 @@ class App extends Component {
 					<div>
 						<Navbar color="dark" dark expand="md">
 							<Container>
-								<Link className="brand" to="/"><h4>MyBlogDotCom</h4></Link>
+								<Link className="brand" to="/">MyBlogDotCom</Link>
 								<Nav>
 									<NavItem>
-										<NavLink href="javascript:void(0)">Contact</NavLink>
+										<Link to="/posts/new">New Post</Link>
 									</NavItem>
 								</Nav>
 							</Container>
@@ -53,10 +53,10 @@ class App extends Component {
 						<Container className="mt-5">
 
 							<Switch>
+								<Route exact path="/" component={Posts} />
 								<Route path="/posts/new" component={PostsNew} />
 								<Route path="/posts/detail/:id" component={PostsDetail} />
-								<Route exact path="/" component={Posts} />
-								<Route component={() => <div>Page Not Found</div>} />
+								<Route component={() => (<center><div>Page Not Found</div></center>) } />
 							</Switch>
 							
 						</Container>

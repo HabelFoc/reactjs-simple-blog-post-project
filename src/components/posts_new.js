@@ -89,7 +89,7 @@ class PostsNew extends Component {
 						component={this.renderField}
 						/>
 					</FormGroup>
-					<Button className="new-posts-btn" type="submit">Submit</Button>
+					<Button className="new-posts-btn" color="primary" type="submit">Submit</Button>
 					<Link className="new-posts-btn" to="/"><Button color="danger">Cancel</Button></Link>
 				</Form>
 			</div>

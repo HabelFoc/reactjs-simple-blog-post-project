@@ -18,28 +18,22 @@ class Posts extends Component {
 		this.props.fetchPosts();
 	}
 
-	onClickListItem(itemData){
-		// get specific post reference by id
-		this.props.history.push(`/posts/detail/${itemData.id}`);
-	}
-
 	renderPosts(){
 		return _.map(this.props.posts, post => {
 			return(
 				<ListGroupItem
-				onClick={this.onClickListItem.bind(this, post)} 
 				key={post.id} 
 				style={{
 					border: 'none',
 				 	borderBottom: '2px solid #ccc',
 				  	marginBottom: '1rem',
-				  	cursor: 'pointer',
-				  	paddingTop: '.75rem',
-				  	paddingBottom: '.75rem'
+				  	cursor: 'pointer'
 				}}
 				>
-					<h4>{post.title}</h4>
-					<p style={{color: '#888'}}>{post.categories}</p>
+					<Link to={`/posts/detail/${post.id}`}>
+						<h4>{post.title}</h4>
+						<p style={{color: '#888'}}>{post.categories}</p>
+					</Link>
 				</ListGroupItem>
 			);
 		})
@@ -49,7 +43,7 @@ class Posts extends Component {
 		return(
 			<div style={{marginBottom: '4rem'}}>
 				<center><h1 style={{marginBottom: '1rem'}}>Posts</h1></center>
-				<Link to="/posts/new"><Button>New Post</Button></Link>
+				<Link to="/posts/new" style={{padding: '.75rem'}}><Button color="primary">New Post</Button></Link>
 				<ListGroup style={{marginTop: '2rem'}}>
 					{this.renderPosts()}
 				</ListGroup>

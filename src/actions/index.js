@@ -67,6 +67,7 @@ export const fetchPost = (id) => {
 					type: FETCH_POST,
 					payload: res.data
 				});
+				
 				console.log('fetchPost request successful!');
 
 			});

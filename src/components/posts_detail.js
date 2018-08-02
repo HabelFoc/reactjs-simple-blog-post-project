@@ -3,12 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchPost } from '../actions';
 
-import {
-	Container,
-	BreadCrumb,
-	BreadCrumbItem,
-	Button
-} from 'reactstrap';
+import { Container, Button, Jumbotron } from 'reactstrap';
+
 
 class PostsDetail extends Component {
 	constructor(props){
@@ -18,35 +14,30 @@ class PostsDetail extends Component {
 	}
 
 	componentDidMount(){
-		const { id } = this.props.match.params;
-		this.props.fetchPost(id);
+		const postId = this.props.match.params.id;
+		this.props.fetchPost(postId);
 	}
 
 	renderContent(){
-		const { post } = this.props;
-		if(post === undefined){
-			console.log(post);
-			return (<div>Loading...</div>);
-		}else{
-			const { title, categories, content } = post;
+		if(this.props.post){
+			const { title, categories, content } = this.props.post;
 			return(
 				<div>
-					<BreadCrumb>
-						<BreadCrumbItem>{title}</BreadCrumbItem>
-					</BreadCrumb>
-					<BreadCrumb>
-						<BreadCrumbItem>{categories}</BreadCrumbItem>
-					</BreadCrumb>
-					<BreadCrumb>
-						<BreadCrumbItem>{content}</BreadCrumbItem>
-					</BreadCrumb>
+					<Jumbotron className="mt-4">
+						<h1 className="display-3">{title}</h1>
+        				<p className="lead">Categories: {categories}</p>
+        				<hr className="my-2" />
+        				<p>{content}</p>
+					</Jumbotron>
 				</div>
+				
 			);
+		}else{
+			return <div>Loading...</div>;
 		}
 	}
 
 	render(){
-		console.log(this.props.post)
 		return(
 			<div>
 				<Container>
