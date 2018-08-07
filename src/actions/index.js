@@ -92,7 +92,7 @@ export const deletePost = (id, callback) => {
 			.delete(`${ROOT_URL}/posts/${id}`)
 			.then(async res => {
 				console.log(`Post ${id} successful deleted...!`);
-				await dispatch(fetchPosts());
+				await dispatch(fetchPosts()); // to update new state (so we don't want to see the deleted post)
 				callback();
 			});
 
@@ -101,4 +101,4 @@ export const deletePost = (id, callback) => {
 		}
 
 	};
-}
+} // END OF 'deletePost' action

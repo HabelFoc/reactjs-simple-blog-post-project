@@ -32,7 +32,7 @@ class PostsNew extends Component {
 		const { createPost, history } = this.props;
 
 		// call an action
-		// pass 'values' as an object {...} & goHomeCB
+		// pass 'values' as an object (key values pair) & return to home page is successfull
 		createPost(values, () => history.push('/'));
 
 		// goBack to home page
@@ -41,8 +41,9 @@ class PostsNew extends Component {
 		// }
 	}
 
+	// redux render field helper function
 	renderField(field){
-		const { meta: { touched, error }, label, types } = field;
+		const { meta: { touched, error }, label, types, input } = field;
 
 		return(
 			<div>
@@ -50,7 +51,7 @@ class PostsNew extends Component {
 				<Input 
 				id={label}
 				type={types}
-				{...field.input}
+				{...input}
 				invalid={(touched && error) ? true:false}
 				/>
 				{(touched && error) ? <FormFeedback>{error}</FormFeedback>: ''}
